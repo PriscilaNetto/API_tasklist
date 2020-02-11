@@ -22,6 +22,7 @@ module.exports = {
     "no-param-reassign": "off",
     "camelcase":"off",
     "no-undescore-dangle":"off",
-    "no-unused-vars":["error", {"argsIgnorePattern": "next"}]
+    "no-unused-vars":["error", {"argsIgnorePattern": "next"}],
+    'node/no-unpublished-require':'off'
   },
 };
