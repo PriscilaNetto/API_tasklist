@@ -2,8 +2,10 @@ import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
 class User extends Model {
-  static init(sequelize) {    // recebe por parametro o sequelize
-    super.init(              // o super chama o método init da classe Model
+  static init(sequelize) {
+    // recebe por parametro o sequelize
+    super.init(
+      // o super chama o método init da classe Model
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
@@ -20,6 +22,9 @@ class User extends Model {
       }
     });
     return this;
+  }
+  checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash); // vai comparar as duas senhas e vai retornar um boolean.
   }
 }
 export default User;
