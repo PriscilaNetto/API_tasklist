@@ -1,5 +1,7 @@
 import express from 'express';
 import routes from './routes';
+// importando a data base
+import './database';
 
 class App {
   constructor() {
