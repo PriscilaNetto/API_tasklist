@@ -26,6 +26,34 @@ class TaskController {
 
     return res.json(tasks);
   }
+
+  async update(req, res) {
+    const { task_id } = req.params;
+    const task = await Task.findByPk(task_id); // findByPk procurando por um id
+
+    if (!task) {
+      return res.status(404).json({ error: 'Tarefa não localizada' });
+    }
+    await task.update(req.body);
+
+    return res.json(task);
+  }
+
+  async delete(req, res) {
+    const { task_id } = req.params;
+    const task = await Task.findByPk(task_id); // findByPk procurando por um id
+
+    if (!task) {
+      return res.status(404).json({ error: 'Tarefa não localizada' });
+    }
+
+    if (task.user_id !== req.userId) {
+      return res.status(401).json({ error: 'Requisição não autorizada!' });
+    }
+
+    await task.destroy();
+    return res.send();
+  }
 }
 
 export default new TaskController();
